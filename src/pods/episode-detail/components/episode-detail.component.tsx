@@ -30,18 +30,23 @@ export const EpisodeDetail: React.FunctionComponent<Props> = (props) => {
             Fecha de emisión: {episode.air_date}
           </Typography>
           Personajes:
-          {episode.characters.map((character) => (
-            <Typography variant="subtitle1" gutterBottom>
-              <MuiLink
-                component={Link}
-                to={linkRoutes.characterDetail(
-                  character.split("/").pop() || "",
-                )}
+          {episode.characters.map((character) => {
+            const id = character.split("/").pop();
+            return (
+              <Typography
+                key={id}
+                variant="subtitle1"
+                gutterBottom
               >
-                {character.split("/").pop()}
-              </MuiLink>
-            </Typography>
-          ))}
+                <MuiLink
+                  component={Link}
+                  to={linkRoutes.characterDetail(id)}
+                >
+                  {id}
+                </MuiLink>
+              </Typography>
+            );
+          })}
         </div>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
